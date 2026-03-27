@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController //mapea o arquivo e fala q é um controller
 @RequestMapping // junto com o RestController, mapa das rotas no mesmo lugar
-public class Controller {
+public class NinjaController {
 
         @GetMapping("/boasvindas") //pega informaçoes⬇
         public String boasVindas(){
