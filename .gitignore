@@ -34,4 +34,5 @@ build/
 
 
 ##ARQUIVOS DE CONFIGURACAO SENSIVEIS
-src/main/resources/application.properties
+
+.env
