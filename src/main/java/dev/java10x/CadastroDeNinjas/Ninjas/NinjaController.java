@@ -3,9 +3,16 @@ package dev.java10x.CadastroDeNinjas.Ninjas;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController //mapea o arquivo e fala q é um controller
 @RequestMapping("/ninjas") // junto com o RestController, mapa das rotas no mesmo lugar
 public class NinjaController {
+        private NinjaService ninjaService;
+
+        public NinjaController(NinjaService ninjaService) {
+                this.ninjaService = ninjaService;
+        }
 
         @GetMapping("/boasvindas") //pega informaçoes⬇
         public String boasVindas(){
@@ -22,8 +29,8 @@ public class NinjaController {
 
         // Mostrar todos os Ninjas (READ)
         @GetMapping("/listar")
-        public String mostrarTodosOsNinjas(){
-            return "Mostrar Ninja";
+        public List<NinjaModel> listarNinjas(){
+            return ninjaService.listarNinjas();
         }
 
         // Mostrar ninja por ID (READ)
