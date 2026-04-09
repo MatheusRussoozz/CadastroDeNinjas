@@ -10,7 +10,7 @@ import java.util.List;
 @RestController //mapea o arquivo e fala q é um controller
 @RequestMapping("/ninjas") // junto com o RestController, mapa das rotas no mesmo lugar
 public class NinjaController {
-        private NinjaService ninjaService;
+        private final NinjaService ninjaService;
 
         public NinjaController(NinjaService ninjaService) {
                 this.ninjaService = ninjaService;
