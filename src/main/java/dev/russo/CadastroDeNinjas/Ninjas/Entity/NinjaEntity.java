@@ -1,10 +1,8 @@
-package dev.russo.CadastroDeNinjas.Ninjas.entity;
+package dev.russo.CadastroDeNinjas.Ninjas.Entity;
 
 import dev.russo.CadastroDeNinjas.Missoes.entity.MissoesEntity;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "tb_cadastro")

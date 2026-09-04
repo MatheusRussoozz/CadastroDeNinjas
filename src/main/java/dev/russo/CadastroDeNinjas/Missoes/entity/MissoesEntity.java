@@ -1,6 +1,6 @@
 package dev.russo.CadastroDeNinjas.Missoes.entity;
 
-import dev.russo.CadastroDeNinjas.Ninjas.entity.NinjaEntity;
+import dev.russo.CadastroDeNinjas.Ninjas.Entity.NinjaEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
