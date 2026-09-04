@@ -19,9 +19,14 @@ public class NinjaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
+    @Column(unique = true)
     private String email;
+
     private int idade;
+
     @ManyToOne
     @JoinColumn(name = "missoes_id")
     private MissoesEntity missoes;
