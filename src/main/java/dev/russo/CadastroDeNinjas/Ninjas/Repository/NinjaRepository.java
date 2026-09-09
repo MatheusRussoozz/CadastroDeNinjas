@@ -1,4 +1,9 @@
 package dev.russo.CadastroDeNinjas.Ninjas.Repository;
 
-public interface NinjaRepository {
+import dev.russo.CadastroDeNinjas.Ninjas.Entity.NinjaEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface NinjaRepository extends JpaRepository<NinjaEntity, Long> {
 }
