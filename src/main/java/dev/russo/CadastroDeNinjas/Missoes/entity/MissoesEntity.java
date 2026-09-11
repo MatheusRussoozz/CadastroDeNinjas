@@ -1,5 +1,6 @@
 package dev.russo.CadastroDeNinjas.Missoes.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.russo.CadastroDeNinjas.Ninjas.Entity.NinjaEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,6 +26,7 @@ public class MissoesEntity {
     private String dificuldade;
 
     @OneToMany(mappedBy = "missoes")
+    @JsonIgnore
     private List<NinjaEntity> ninjas;
 
 
