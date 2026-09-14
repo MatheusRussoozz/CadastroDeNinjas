@@ -22,5 +22,15 @@ public class NinjaService {
         return ninjaRepository.findAll();
     }
 
+    //Listar ninja por ID
+    public NinjaEntity listarNinjaPorId(Long id){
+        Optional<NinjaEntity> ninjaEntity = ninjaRepository.findById(id);
+
+        return ninjaEntity.orElse(null);
+    }
+
+    public NinjaEntity criarNinja(NinjaEntity ninja){
+        return ninjaRepository.save(ninja);
+    }
 
 }
