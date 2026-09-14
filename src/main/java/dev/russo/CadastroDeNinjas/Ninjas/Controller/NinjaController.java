@@ -22,8 +22,8 @@ public class NinjaController {
 
         // Adicionar Ninja (Create)
         @PostMapping("/criar")
-        public String criarNinja(){
-            return "Ninja Criado";
+        public NinjaEntity criarNinja(@RequestBody NinjaEntity ninja){
+            return ninjaService.criarNinja(ninja);
         }
 
         // Mostrar Todos os Ninjas (Read)
@@ -43,6 +43,7 @@ public class NinjaController {
         public String alterarNinjaPorId(){
             return "Alterar ninja por id";
         }
+
 
         // Deletar Ninja (Delete)
         @DeleteMapping("/deletarID")
