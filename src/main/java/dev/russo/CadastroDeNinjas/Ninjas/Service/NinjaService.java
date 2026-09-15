@@ -45,4 +45,14 @@ public class NinjaService {
         }
     }
 
+    // Atualizar Ninja
+    public NinjaEntity atualizarNinjaPorId(Long id, NinjaEntity ninja) {
+
+        if (ninjaRepository.existsById(id)){
+            ninja.setId(id);
+            ninjaRepository.save(ninja);
+        }
+        return null;
+    }
+
 }
