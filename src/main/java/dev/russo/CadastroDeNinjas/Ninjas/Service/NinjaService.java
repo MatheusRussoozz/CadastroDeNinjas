@@ -1,6 +1,8 @@
 package dev.russo.CadastroDeNinjas.Ninjas.Service;
 
+import dev.russo.CadastroDeNinjas.Ninjas.Dto.NinjaDTO;
 import dev.russo.CadastroDeNinjas.Ninjas.Entity.NinjaEntity;
+import dev.russo.CadastroDeNinjas.Ninjas.Mapper.NinjaMapper;
 import dev.russo.CadastroDeNinjas.Ninjas.Repository.NinjaRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,11 @@ import java.util.Optional;
 public class NinjaService {
 
     private final NinjaRepository ninjaRepository;
+    private final NinjaMapper ninjaMapper;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
     //Listar todos os ninjas
@@ -30,8 +34,10 @@ public class NinjaService {
     }
 
     // Criar novo ninja
-    public NinjaEntity criarNinja(NinjaEntity ninja){
-        return ninjaRepository.save(ninja);
+    public NinjaDTO criarNinja(NinjaDTO ninjaDTO){
+        NinjaEntity ninjaEntity = ninjaMapper.toEntity(ninjaDTO);
+        ninjaRepository.save(ninjaEntity);
+        return ninjaMapper.toDto(ninjaEntity);
     }
 
     //Deletar ninja
