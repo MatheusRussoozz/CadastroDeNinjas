@@ -1,5 +1,6 @@
 package dev.russo.CadastroDeNinjas.Ninjas.Controller;
 
+import dev.russo.CadastroDeNinjas.Ninjas.Dto.NinjaDTO;
 import dev.russo.CadastroDeNinjas.Ninjas.Entity.NinjaEntity;
 import dev.russo.CadastroDeNinjas.Ninjas.Service.NinjaService;
 import org.springframework.web.bind.annotation.*;
@@ -22,25 +23,25 @@ public class NinjaController {
 
         // Adicionar Ninja (Create)
         @PostMapping("/criar")
-        public NinjaEntity criarNinja(@RequestBody NinjaEntity ninja){
+        public NinjaDTO criarNinja(@RequestBody NinjaDTO ninja){
             return ninjaService.criarNinja(ninja);
         }
 
         // Mostrar Todos os Ninjas (Read)
         @GetMapping("/listar")
-        public List<NinjaEntity> mostrarTodosOsNinjas(){
+        public List<NinjaDTO> mostrarTodosOsNinjas(){
             return ninjaService.listarNinjas();
         }
 
         // Mostrar Ninja por id (Read)
         @GetMapping("/listar/{id}")
-        public NinjaEntity listarNinjaPorId(@PathVariable Long id){
+        public NinjaDTO listarNinjaPorId(@PathVariable Long id){
             return ninjaService.listarNinjaPorId(id);
         }
 
         // Alterar dados do ninja (Update)
         @PutMapping("/atualizar/{id}")
-        public NinjaEntity alterarNinjaPorId(@PathVariable Long id, @RequestBody NinjaEntity ninja ){
+        public NinjaDTO alterarNinjaPorId(@PathVariable Long id, @RequestBody NinjaDTO ninja ){
             return ninjaService.atualizarNinjaPorId(id, ninja);
         }
 

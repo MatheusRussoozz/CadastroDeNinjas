@@ -1,37 +1,44 @@
 package dev.russo.CadastroDeNinjas.Ninjas.Service;
 
+import dev.russo.CadastroDeNinjas.Ninjas.Dto.NinjaDTO;
 import dev.russo.CadastroDeNinjas.Ninjas.Entity.NinjaEntity;
+import dev.russo.CadastroDeNinjas.Ninjas.Mapper.NinjaMapper;
 import dev.russo.CadastroDeNinjas.Ninjas.Repository.NinjaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class NinjaService {
 
     private final NinjaRepository ninjaRepository;
+    private final NinjaMapper ninjaMapper;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
-    //Listar todos os ninjas
 
-    public List<NinjaEntity> listarNinjas(){
-        return ninjaRepository.findAll();
+    public List<NinjaDTO> listarNinjas(){
+        List<NinjaEntity> ninjas = ninjaRepository.findAll();
+        return ninjas.stream()
+                .map(ninjaMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     //Listar ninja por ID
-    public NinjaEntity listarNinjaPorId(Long id){
+    public NinjaDTO  listarNinjaPorId(Long id){
         Optional<NinjaEntity> ninjaEntity = ninjaRepository.findById(id);
-
-        return ninjaEntity.orElse(null);
+        return ninjaEntity.map(ninjaMapper::toDto).orElse(null);
     }
 
-    // Criar novo ninja
-    public NinjaEntity criarNinja(NinjaEntity ninja){
-        return ninjaRepository.save(ninja);
+    public NinjaDTO criarNinja(NinjaDTO ninjaDTO){
+        NinjaEntity ninjaEntity = ninjaMapper.toEntity(ninjaDTO);
+        ninjaRepository.save(ninjaEntity);
+        return ninjaMapper.toDto(ninjaEntity);
     }
 
     //Deletar ninja
@@ -46,13 +53,14 @@ public class NinjaService {
     }
 
     // Atualizar Ninja
-    public NinjaEntity atualizarNinjaPorId(Long id, NinjaEntity ninja) {
-
-        if (ninjaRepository.existsById(id)){
-            ninja.setId(id);
-            ninjaRepository.save(ninja);
+    public NinjaDTO atualizarNinjaPorId(Long id, NinjaDTO ninja) {
+        Optional<NinjaEntity> ninjaEntity = ninjaRepository.findById(id);
+        if (ninjaEntity.isPresent()) {
+            NinjaEntity ninjaNovo = ninjaMapper.toEntity(ninja);
+            ninjaNovo.setId(id);
+            ninjaRepository.save(ninjaNovo);
+            return ninjaMapper.toDto(ninjaNovo);
         }
-        return null;
+        throw new RuntimeException("Ninja Não Encontrado");
     }
-
 }
