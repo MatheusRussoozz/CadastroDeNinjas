@@ -42,13 +42,15 @@ public class NinjaService {
     }
 
     //Deletar ninja
-    public void deletarNinja(Long id){
+    public Boolean deletarNinja(Long id){
         Optional<NinjaEntity> ninjaExiste = ninjaRepository.findById(id);
 
         if (ninjaExiste.isPresent()){
             ninjaRepository.deleteById(id);
+            return true;
+
         }else {
-            throw new RuntimeException("Ninja Não Encontrado");
+            return false;
         }
     }
 

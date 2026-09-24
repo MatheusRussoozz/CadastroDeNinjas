@@ -63,12 +63,14 @@ public class MissoesService {
 
     //Deletar Missao
 
-    public void deletarMissao(Long id){
+    public Boolean deletarMissao(Long id){
         Optional<MissoesEntity> buscaMissao = missoesRepository.findById(id);
         if (buscaMissao.isPresent()){
             missoesRepository.deleteById(id);
+            return true;
+        }else {
+            return false;
         }
-        throw new RuntimeException("Missao não encotrada");
     }
 
 }
